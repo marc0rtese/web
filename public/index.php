@@ -12,17 +12,24 @@ $loader = new \Twig\Loader\FilesystemLoader('../views');
 $twig = new \Twig\Environment($loader);
 
 $url = $_SERVER["REQUEST_URI"];
+$title = "";
+$template = "";
+//image = "";
+
+$context = []; //словарь
 
 if ($url == "/") {
-    // это убираем require "../views/main.html";
-    
-    echo $twig->render("main.html");
+    $title = "Главная";
+    $template = "main.twig";
 } elseif (preg_match("#/duck#", $url)) {
-    // и это тоже require "../views/mermaid.html";
-    
-    echo $twig->render("duck.html");
-} elseif (preg_match("#/lastochka#", $url)) {
-    // и вот это require "../views/uranus.html";
-    
-    echo $twig->render("lastochka.html");
+    $title = "Утошка";
+    $template = "base_image.twig";
+    $context['image'] = "/img/duck.jpg";
+} elseif (preg_match("#/lastochka#", $url)) {    
+    $title = "Ласточка";
+    $template = "base_image.twig";
+    $context['image'] = "/img/lastochka.jpg";
 }
+$context['title'] = $title;
+
+echo $twig->render($template, $context);

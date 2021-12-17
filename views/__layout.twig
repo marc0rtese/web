@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>{{title}}</title>
 </head>
 <body>
-    {% extends "__layout.twig" %}
-    {% block content %}
-        <a href="/lastochka">Ласточка</a>
+    <div>
+        <a href="/">Главная</a>
         <a href="/duck">Утошка</a>
+        <a href="/lastochka">Ласточка</a>
+    </div>
+    {% block content %}
+        пустота
     {% endblock %}
 </body>
 </html>
