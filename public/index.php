@@ -2,6 +2,14 @@
 
 // подключаем пакеты которые установили через composer
 require_once '../vendor/autoload.php';
+require_once "../controllers/MainController.php";
+require_once "../controllers/DuckController.php";
+require_once "../controllers/DuckImageController.php";
+require_once "../controllers/DuckInfoController.php";
+require_once "../controllers/LastochkaController.php";
+require_once "../controllers/LastochkaImageController.php";
+require_once "../controllers/LastochkaInfoController.php";
+require_once "../controllers/Controller404.php";
 
 $loader = new \Twig\Loader\FilesystemLoader('../views');
 
@@ -14,61 +22,30 @@ $template = "";
 //image = "";
 
 $context = []; //словарь
-$duckmenu = [
-    [
-        "title" => "Картинка",
-        "url" => "/duck/image",
-    ],
-    [
-        "title" => "Описание",
-        "url" => "/duck/text",
-    ]
-];
-$lastochkamenu = [
-    [
-        "title" => "Картинка",
-        "url" => "/lastochka/image",
-    ],
-    [
-        "title" => "Описание",
-        "url" => "/lastochka/text",
-    ]
-];
+$controller = new Controller404($twig);
+
 
 if ($url == "/") {
-    $title = "Главная";
-    $template = "main.twig";
+    $controller = new MainController($twig);
 } elseif (preg_match("#/duck#", $url)) {
-    $title = "Утошка";
-    $template = "__object.twig";
-    $context['link1'] = "/duck/image";
-    $context['link2'] = "/duck/text";
-    
+    $controller = new DuckController($twig);
     if (preg_match("#^/duck/image#", $url)) {
-        $template = "base_image.twig";
-        $context['image'] = "/img/duck.jpg";
-        $title = "Картинка";
+        $controller = new DuckImageController($twig);
     } elseif (preg_match("#/duck/text#", $url)) {
-        $template = "duck_info.twig";
-        $title = "Описание";
+        $controller = new DuckInfoController($twig);
     }
 
 } elseif (preg_match("#/lastochka#", $url)) {    
-    $title = "Ласточка";
-    $template = "__object.twig";
-    $context['link1'] = "/lastochka/image";
-    $context['link2'] = "/lastochka/text";
+    $controller = new LastochkaController($twig);
     if (preg_match("#^/lastochka/image#", $url)) {
-        $template = "base_image.twig";
-        $context['image'] = "/img/lastochka.jpg";
-        $title = "Картинка";
+        $controller = new LastochkaImageController($twig);
     } elseif (preg_match("#/lastochka/text#", $url)) {
-        $template = "lastochka_info.twig";
-        $title = "Описание";
+        $controller = new LastochkaInfoController($twig);
     }
 }
-$context['title'] = $title;
-$context['duckmenu'] = $duckmenu;
-$context['lastochkamenu'] = $lastochkamenu;
 
-echo $twig->render($template, $context);
+
+//echo $twig->render($template, $context);
+if ($controller) {
+    $controller->get();
+}
