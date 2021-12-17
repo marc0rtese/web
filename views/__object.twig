@@ -1,0 +1,10 @@
+{% extends "__layout.twig" %}
+
+{% block content %}
+<div style="margin-top: 20px; margin-bottom: 20px;">
+    <a class="btn btn-link {{ title == 'Картинка' ? 'active' }}" href={{link1}} role="button">Картинка</a>
+    <a class="btn btn-link {{ title == 'Описание' ? 'active' }}" href={{link2}} role="button">Описание</a>
+</div>
+    {% block objectContent %}
+    {% endblock %}
+{% endblock %}

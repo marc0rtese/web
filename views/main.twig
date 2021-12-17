@@ -1,5 +1,20 @@
 {% extends "__layout.twig" %}
 
 {% block content %}
-Я главный тут
+<div class="row" style="margin-top: 20px;">
+    <div class="col">
+        <a class="btn btn-primary" href="/duck" role="button">Утошка</a>
+        {% for item in duckmenu %}
+        <a class="btn btn-link" href="{{item.url}}" role="button">{{item.title}}</a>
+        {% endfor %}
+    </div>
+</div>
+<div class="row" style="margin-top: 20px;">
+    <div class="col">
+        <a class="btn btn-primary" href="/lastochka" role="button">Ласточка</a>
+        {% for item in lastochkamenu %}
+        <a class="btn btn-link" href="{{item.url}}" role="button">{{item.title}}</a>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

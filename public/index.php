@@ -3,9 +3,6 @@
 // подключаем пакеты которые установили через composer
 require_once '../vendor/autoload.php';
 
-// создаем загрузчик шаблонов, и указываем папку с шаблонами
-// \Twig\Loader\FilesystemLoader -- это типа как в C# писать Twig.Loader.FilesystemLoader, 
-// только слеш вместо точек
 $loader = new \Twig\Loader\FilesystemLoader('../views');
 
 // создаем собственно экземпляр Twig с помощью которого будет рендерить
@@ -17,19 +14,61 @@ $template = "";
 //image = "";
 
 $context = []; //словарь
+$duckmenu = [
+    [
+        "title" => "Картинка",
+        "url" => "/duck/image",
+    ],
+    [
+        "title" => "Описание",
+        "url" => "/duck/text",
+    ]
+];
+$lastochkamenu = [
+    [
+        "title" => "Картинка",
+        "url" => "/lastochka/image",
+    ],
+    [
+        "title" => "Описание",
+        "url" => "/lastochka/text",
+    ]
+];
 
 if ($url == "/") {
     $title = "Главная";
     $template = "main.twig";
 } elseif (preg_match("#/duck#", $url)) {
     $title = "Утошка";
-    $template = "base_image.twig";
-    $context['image'] = "/img/duck.jpg";
+    $template = "__object.twig";
+    $context['link1'] = "/duck/image";
+    $context['link2'] = "/duck/text";
+    
+    if (preg_match("#^/duck/image#", $url)) {
+        $template = "base_image.twig";
+        $context['image'] = "/img/duck.jpg";
+        $title = "Картинка";
+    } elseif (preg_match("#/duck/text#", $url)) {
+        $template = "duck_info.twig";
+        $title = "Описание";
+    }
+
 } elseif (preg_match("#/lastochka#", $url)) {    
     $title = "Ласточка";
-    $template = "base_image.twig";
-    $context['image'] = "/img/lastochka.jpg";
+    $template = "__object.twig";
+    $context['link1'] = "/lastochka/image";
+    $context['link2'] = "/lastochka/text";
+    if (preg_match("#^/lastochka/image#", $url)) {
+        $template = "base_image.twig";
+        $context['image'] = "/img/lastochka.jpg";
+        $title = "Картинка";
+    } elseif (preg_match("#/lastochka/text#", $url)) {
+        $template = "lastochka_info.twig";
+        $title = "Описание";
+    }
 }
 $context['title'] = $title;
+$context['duckmenu'] = $duckmenu;
+$context['lastochkamenu'] = $lastochkamenu;
 
 echo $twig->render($template, $context);
