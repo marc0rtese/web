@@ -1,9 +1,22 @@
 {% extends "__layout.twig" %}
 
+
 {% block content %}
+
+{% macro btn(text, url, select) %}
+    {% if text==select %}
+        <a href="{{url}}" class="btn btn-link active" role="button">{{text}}</a>
+    {% elseif text!=select %}
+        <a href="{{url}}" class="btn btn-link" role="button">{{text}}</a>
+    {% endif %}
+{% endmacro %}
+
+
+
+
 <div style="margin-top: 20px; margin-bottom: 20px;">
-    <a class="btn btn-link {{ title == 'Картинка' ? 'active' }}" href={{link1}} role="button">Картинка</a>
-    <a class="btn btn-link {{ title == 'Описание' ? 'active' }}" href={{link2}} role="button">Описание</a>
+    {{ _self.btn("Картинка", link1, title) }}
+    {{ _self.btn("Описание", link2, title) }}
 </div>
     {% block objectContent %}
     {% endblock %}

@@ -1,19 +1,33 @@
 {% extends "__layout.twig" %}
 
+
+
 {% block content %}
+{% macro btn(text, url, bool, type) %}
+    {% if bool==true %}
+        {% if type=="warning" %}
+            <a href="{{url}}" class="btn btn-{{ type }}" role="button">{{text}}</a>
+        {% elseif type==null %}
+            <a href="{{url}}" class="btn btn-primary" role="button">{{text}}</a>
+        {% endif %}
+    {% elseif bool==false %}
+        <a href="{{url}}" class="btn btn-link" role="button">{{text}}</a>
+    {% endif %}
+{% endmacro %}
+
 <div class="row" style="margin-top: 20px;">
     <div class="col">
-        <a class="btn btn-primary" href="/duck" role="button">Утошка</a>
+        {{ _self.btn("Утошка", "/duck", true ) }}
         {% for item in duckmenu %}
-        <a class="btn btn-link" href="{{item.url}}" role="button">{{item.title}}</a>
+        {{ _self.btn(item.title, item.url, false) }}
         {% endfor %}
     </div>
 </div>
 <div class="row" style="margin-top: 20px;">
     <div class="col">
-        <a class="btn btn-primary" href="/lastochka" role="button">Ласточка</a>
+        {{ _self.btn("Ласточка", "/lastochka", true) }}
         {% for item in lastochkamenu %}
-        <a class="btn btn-link" href="{{item.url}}" role="button">{{item.title}}</a>
+        {{ _self.btn(item.title, item.url, false) }}
         {% endfor %}
     </div>
 </div>
