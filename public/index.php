@@ -14,15 +14,19 @@ require_once "../controllers/Controller404.php";
 $loader = new \Twig\Loader\FilesystemLoader('../views');
 
 // создаем собственно экземпляр Twig с помощью которого будет рендерить
-$twig = new \Twig\Environment($loader);
+$twig = new \Twig\Environment($loader, ["debug" => true]);
+$twig->addExtension(new \Twig\Extension\DebugExtension());
 
 $url = $_SERVER["REQUEST_URI"];
 $title = "";
 $template = "";
+$uri = "";
 //image = "";
 
 $context = []; //словарь
 $controller = new Controller404($twig);
+
+$pdo = new PDO("mysql:host=localhost;dbname=birds;charset=utf8", "root", "");
 
 
 if ($url == "/") {
@@ -45,7 +49,7 @@ if ($url == "/") {
 }
 
 
-//echo $twig->render($template, $context);
 if ($controller) {
+    $controller->setPDO($pdo);
     $controller->get();
 }

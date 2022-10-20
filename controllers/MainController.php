@@ -28,10 +28,12 @@ class MainController extends TwigBaseController {
 
     public function getContext() : array
     {
-        $context = parent::getContext(); // вызываем родительский метод
-        $context['title'] = $this->title; // добавляем title в контекст
-        $context['duckmenu'] = $this->duckmenu;
-        $context['lastochkamenu'] = $this->lastochkamenu;
+       // $context = parent::getContext();
+       // $context['title'] = $this->title;
+       // $context['duckmenu'] = $this->duckmenu;
+       // $context['lastochkamenu'] = $this->lastochkamenu;
+       $query = $this->pdo->query("SELECT * FROM space_objects");
+       $context['space_objects'] = $query->fetchAll();
         return $context;
     }
 }

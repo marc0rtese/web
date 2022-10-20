@@ -15,20 +15,18 @@
     {% endif %}
 {% endmacro %}
 
-<div class="row" style="margin-top: 20px;">
-    <div class="col">
-        {{ _self.btn("Утошка", "/duck", true ) }}
-        {% for item in duckmenu %}
-        {{ _self.btn(item.title, item.url, false) }}
-        {% endfor %}
-    </div>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<div class="container">
+    <div class="row">
+{% for object in space_objects %}
+
+            <div class="col" style="margin: 10px; padding: 5px; border:2px solid grey; width: 200px;">
+                <div class="row"><img src="{{ object.image }}" width="200" height="200"></div>
+                <div class="row" style="display: block; align-items: center; text-align: center; margin: 0 auto; padding-top: 10px;"><a href="{{ object.url }}" class="btn btn-primary" role="button">{{object.title}}</a></div>
+                <div class="row" ><div class="col"><a href="{{object.url}}/image" class="btn btn-link" role="button">Картинка</a></div><div class="col"><a href="{{object.url}}/text" class="btn btn-link" role="button">Описание</a></div></div>
+                
+            </div>
+{% endfor %}
 </div>
-<div class="row" style="margin-top: 20px;">
-    <div class="col">
-        {{ _self.btn("Ласточка", "/lastochka", true) }}
-        {% for item in lastochkamenu %}
-        {{ _self.btn(item.title, item.url, false) }}
-        {% endfor %}
-    </div>
 </div>
 {% endblock %}
