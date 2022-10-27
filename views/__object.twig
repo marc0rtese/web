@@ -3,11 +3,11 @@
 
 {% block content %}
 
-{% macro btn(text, url, select) %}
+{% macro btn(text, select) %}
     {% if text==select %}
-        <a href="{{url}}" class="btn btn-link active" role="button">{{text}}</a>
+        <a href="/space-object/{{ id }}/?show=image" class="btn btn-link active" role="button">{{text}}</a>
     {% elseif text!=select %}
-        <a href="{{url}}" class="btn btn-link" role="button">{{text}}</a>
+        <a href="/space-object/{{ id }}/?show=info" class="btn btn-link" role="button">{{text}}</a>
     {% endif %}
 {% endmacro %}
 
@@ -15,9 +15,24 @@
 
 
 <div style="margin-top: 20px; margin-bottom: 20px;">
-    {{ _self.btn("Картинка", "/space-object/#{id}/image", title) }}
-    {{ _self.btn("Описание", "/space-object/#{id}/info", title) }}
+    {% if title == "Картинка" %}
+    <a href="/space-object/{{ id }}?show=image" class="btn btn-link active" role="button" title="Картинка">Картинка</a>
+    <a href="/space-object/{{ id }}?show=info" class="btn btn-link" role="button">Описание</a>
+    {% elseif this.title == "Описание" %}
+    <a href="/space-object/{{ id }}?show=image" class="btn btn-link" role="button">Картинка</a>
+    <a href="/space-object/{{ id }}?show=info" class="btn btn-link active" role="button">Описание</a>
+    {% else %}
+    <a href="/space-object/{{ id }}?show=image" class="btn btn-link" role="button" title="Картинка">Картинка</a>
+    <a href="/space-object/{{ id }}?show=info" class="btn btn-link" role="button">Описание</a>
+    {% endif %}
 </div>
     {% block objectContent %}
+    {% if image != null %}
+    <img src="{{image}}" alt="" style="border-radius: 10px 10px 10px 10px; margin-top: 8px; border: solid 3px #6E6E6E;">
+    {% elseif info != null %}
+    {{info}}
+    {% else %}
+
+    {% endif %}
     {% endblock %}
 {% endblock %}

@@ -28,10 +28,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/">Главная</a>
                 </li>
-                {% for object in space_objects %}
+                {% for type in types %}
                 <li class="nav-item">
-                    <a class="nav-link" href="/space-object/{{object.id}}">{{object.title}}</a>
-                </li>
+                    <!-- добавил href="/?type={{ type.type }}" -->
+                    <a class="nav-link" href="/?type={{ type.type }}">{{ type.type|title }}</a>
+                 </li>
                 {% endfor %}
             </ul>
             </div>
