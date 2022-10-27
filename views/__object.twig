@@ -15,8 +15,8 @@
 
 
 <div style="margin-top: 20px; margin-bottom: 20px;">
-    {{ _self.btn("Картинка", link1, title) }}
-    {{ _self.btn("Описание", link2, title) }}
+    {{ _self.btn("Картинка", "/space-object/#{id}/image", title) }}
+    {{ _self.btn("Описание", "/space-object/#{id}/info", title) }}
 </div>
     {% block objectContent %}
     {% endblock %}

@@ -22,8 +22,8 @@
 
             <div class="col" style="margin: 10px; padding: 5px; border:2px solid grey; width: 200px;">
                 <div class="row"><img src="{{ object.image }}" width="200" height="200"></div>
-                <div class="row" style="display: block; align-items: center; text-align: center; margin: 0 auto; padding-top: 10px;"><a href="{{ object.url }}" class="btn btn-primary" role="button">{{object.title}}</a></div>
-                <div class="row" ><div class="col"><a href="{{object.url}}/image" class="btn btn-link" role="button">Картинка</a></div><div class="col"><a href="{{object.url}}/text" class="btn btn-link" role="button">Описание</a></div></div>
+                <div class="row" style="display: block; align-items: center; text-align: center; margin: 0 auto; padding-top: 10px;"><a href="/space-object/{{ object.id }}" class="btn btn-primary" role="button">{{object.title}}</a></div>
+                <div class="row" ><div class="col"><a href="/space-object/{{object.id}}/image" class="btn btn-link" role="button">Картинка</a></div><div class="col"><a href="/space-object/{{object.id}}/info" class="btn btn-link" role="button">Описание</a></div></div>
                 
             </div>
 {% endfor %}

@@ -28,12 +28,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/">Главная</a>
                 </li>
+                {% for object in space_objects %}
                 <li class="nav-item">
-                    <a class="nav-link" href="/duck">Утошка</a>
+                    <a class="nav-link" href="/space-object/{{object.id}}">{{object.title}}</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/lastochka">Ласточка</a>
-                </li>
+                {% endfor %}
             </ul>
             </div>
         </div>
