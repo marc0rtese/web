@@ -1,0 +1,48 @@
+{% extends "__layout.twig" %}
+
+{% block content %}
+    <form class="row g-3" action="">
+
+        <div class="col-md-3">
+            <label for="inputState" class="form-label">Тип</label>
+            <select id="inputState" class="form-select" name="type">
+                <option value="">Все</option>
+                {% for type in types %}
+                <option value="{{ type.type }}">{{ type.type }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <label for="inputTitle" class="form-label">Название</label>
+            <input type="text" class="form-control" id="inputTitle" name="title">
+        </div>
+
+        <div class="col-md-3">
+            <label for="inputText" class="form-label">Описание</label>
+            <input type="text" class="form-control" id="inputText" name="text">
+        </div>
+
+        <div class="col-md-3" style="padding-top: 31px; padding-left: 10px;">
+            <button type="submit" class="btn btn-primary">Найти</button>
+        </div>
+
+    </form>
+    <div class="col-md-12" style="margin-top: 5px; border:1px solid #ced4da; border-radius: 10px;">
+    {% if objects %}
+    {% set i = 0 %}
+    {% for object in objects %}
+    {% if i==0 %}
+    <a class="nav-link" href="/space-object/{{ object.id }}">{{ object.title }}</a>
+    {% else %}
+    <a class="nav-link" href="/space-object/{{ object.id }}" style="border-top:1px solid #ced4da">{{ object.title }}</a>
+    {% endif %}
+    {% set i = i + 1 %}
+    {% endfor %}
+    {% else %}
+    <label>Такого нету, но зато есть картинка:</label>
+    <img src="/img/notfoundv2.jpg" alt="" style="border-radius: 10px 10px 10px 10px; margin-top: 8px; border: solid 3px #6E6E6E;">
+    {% endif %}
+    </div>
+
+{% endblock %}
