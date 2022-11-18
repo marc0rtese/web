@@ -18,6 +18,8 @@ class MainController extends BaseBirdTwigController {
         $context['space_objects'] = $query->fetchAll();
        $context['title'] = "Главная";
 
+       $query = $this->pdo->query("SELECT * FROM forest_animals");
+       $context['forest_animals'] = $query->fetchAll();
         return $context;
     }
 }

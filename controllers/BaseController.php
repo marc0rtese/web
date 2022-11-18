@@ -1,5 +1,5 @@
 <?php
-// класс абстрактный, чтобы нельзя было создать экземпляр
+
 abstract class BaseController {
     public PDO $pdo;
     public array $params;
@@ -13,12 +13,19 @@ abstract class BaseController {
     }
 
     public function getContext(): array {
-        return []; // по умолчанию пустой контекст
+        return []; 
+    }
+
+    public function process_response() {
+        $method = $_SERVER['REQUEST_METHOD'];
+        $context = $this->getContext();
+        if ($method == 'GET') {
+            $this->get($context);
+        }else if ($method == 'POST') {
+            $this->post($context);
+        }
     }
     
-    // с помощью функции get будет вызывать непосредственно рендеринг
-    // так как рендерить необязательно twig шаблоны, а можно, например, всякий json
-    // то метод сделаем абстрактным, ну типа кто наследуем BaseController
-    // тот обязан переопределить этот метод
-    abstract public function get();
+    public function get(array $context) {}
+    public function post(array $context) {}
 }

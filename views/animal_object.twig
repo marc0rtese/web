@@ -1,0 +1,28 @@
+{% extends "__layout.twig" %}
+
+
+{% block content %}
+
+
+<div style="margin-top: 20px; margin-bottom: 20px;">
+    {% if title == "Картинка" %}
+    <a href="/forest-animals/{{ id }}?show=image" class="btn btn-link active" role="button" title="Картинка">Картинка</a>
+    <a href="/forest-animals/{{ id }}?show=info" class="btn btn-link" role="button">Описание</a>
+    {% elseif this.title == "Описание" %}
+    <a href="/forest-animals/{{ id }}?show=image" class="btn btn-link" role="button">Картинка</a>
+    <a href="/forest-animals/{{ id }}?show=info" class="btn btn-link active" role="button">Описание</a>
+    {% else %}
+    <a href="/forest-animals/{{ id }}?show=image" class="btn btn-link" role="button" title="Картинка">Картинка</a>
+    <a href="/forest-animals/{{ id }}?show=info" class="btn btn-link" role="button">Описание</a>
+    {% endif %}
+</div>
+    {% block objectContent %}
+    {% if image != null %}
+    <img src="{{image}}" alt="" style="border-radius: 10px 10px 10px 10px; margin-top: 8px; border: solid 3px #6E6E6E;">
+    {% elseif info != null %}
+    {{info}}
+    {% else %}
+
+    {% endif %}
+    {% endblock %}
+{% endblock %}

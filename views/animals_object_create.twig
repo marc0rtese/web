@@ -1,0 +1,37 @@
+{% extends "__layout.twig" %}
+
+{% block content %}
+    <h1>Добавление животного</h1>
+    <hr>
+
+    {% if message1 %}
+    <div class="alert alert-info">
+        {{ message1 }}
+    </div>
+    {% endif %}
+
+    {% if message %}
+    <div class="alert alert-info">
+        {{ message }}
+        <a href="/forest-animals/{{id}}">открыть новый объект</a>
+    </div>
+    {% endif %}
+
+    <form enctype="multipart/form-data" method="POST" class="row g-3">
+        <div class="col-6">
+            <label class="form-label">Название</label>
+            <input type="text" class="form-control" name="title">
+        </div>
+        <div class="col-12">
+            <label class="form-label">Картинка</label>
+            <input class="form-control" type="file" name="image">
+        </div>
+        <div class="col-12">
+            <textarea name="info" placeholder="Полное описание..." class="form-control" rows="5"></textarea>
+        </div>
+        <div class="col-12 text-end">
+            <button type="submit" class="btn btn-primary">Добавить</button>
+        </div>
+    </form>
+
+{% endblock %}

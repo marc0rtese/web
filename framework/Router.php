@@ -67,8 +67,11 @@ class Router {
         if ($controllerInstance instanceof BaseBirdTwigController) {
             $controllerInstance->setTwig($this->twig);
         }
+        if ($controllerInstance instanceof BaseAnimalTwigController) {
+            $controllerInstance->setTwig($this->twig);
+        }
 
         // вызываем
-        return $controllerInstance->get();
+        return $controllerInstance->process_response();
     }
 }
