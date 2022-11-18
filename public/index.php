@@ -7,6 +7,8 @@ require_once '../controllers/SearchController.php';
 require_once '../controllers/BirdsObjectCreateController.php';
 require_once '../controllers/AnimalsObjectCreateController.php';
 require_once '../controllers/AnimalsObjectController.php';
+require_once '../controllers/BirdsObjectDeleteController.php';
+require_once '../controllers/AnimalsObjectDeleteController.php';
 
 require_once "../controllers/Controller404.php";
 require_once "../controllers/ObjectController.php";
@@ -32,5 +34,7 @@ $router->add("/search", SearchController::class);
 $router->add("/space-object/createbird", BirdsObjectCreateController::class);
 $router->add("/space-object/createanimal", AnimalsObjectCreateController::class);
 $router->add("/forest-animals/(?P<id>\d+)", AnimalsObjectController::class);
+$router->add("/space-object/delete", BirdsObjectDeleteController::class);
+$router->add("/forest-animals/delete", AnimalsObjectDeleteController::class);
 
 $router->get_or_default(Controller404::class);
